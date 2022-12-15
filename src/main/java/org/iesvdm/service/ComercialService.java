@@ -1,8 +1,10 @@
 package org.iesvdm.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.iesvdm.dao.ComercialDAO;
+import org.iesvdm.modelo.Cliente;
 import org.iesvdm.modelo.Comercial;
 import org.springframework.stereotype.Service;
 
@@ -19,5 +21,25 @@ public class ComercialService {
 		return comercialDAO.getAll();
 	}
 	
-
+	public Comercial one (Integer id) {
+		Optional optCli = comercialDAO.find(id);
+		if(optCli.isPresent()) {
+			return (Comercial) optCli.get();
+		}
+		else {
+			return null;
+		}
+	}
+	
+	public void newComercial (Comercial cliente) {
+		comercialDAO.create(cliente);
+	}
+	
+	public void replaceComercial(Comercial cliente) {
+		comercialDAO.update(cliente);
+	}
+	public void deleteComercial(int id) {
+		comercialDAO.delete(id);
+	}
+	
 }

@@ -10,6 +10,9 @@ import lombok.Data;
 @AllArgsConstructor
 public class Cliente {
 	
+	public Cliente() {
+		// TODO Auto-generated constructor stub
+	}
 	private long id;
 	private String nombre;
 	private String apellido1;
