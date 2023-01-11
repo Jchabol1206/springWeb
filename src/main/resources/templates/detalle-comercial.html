@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Detalle Cliente</title>
+<title>Detalle Comercial</title>
 <style>
 .clearfix::after {
 	content: "";
@@ -76,7 +76,29 @@
 			</div> 
 		</div>
 		
+		<hr>
+			<div class="clearfix">
+			<div style="float: left;width: 14%">Id</div>
+			<div style="float: left;width: 14%">total</div>
+			<div style="float: left;width: 14%">Fecha</div>
+			<div style="float: left;width: 14%">Nombre</div>
+		</div>
+		<div class="clearfix">
+			<hr/>
+		</div>
+		<div  th:each="pedido : ${pedidos}" style="margin-top: 6px;" class="clearfix">
+			<div style="float: left;width: 14%" th:text="${pedido.id}">0</div>
+			<div style="float: left;width: 14%" th:text="${pedido.total}">0</div>
+			<div style="float: left;width: 14%" th:text="${pedido.fecha}">fecha</div>
+			<a style="float: left;width: 14%" th:each="cliente : ${listaClientes}" th:if="${cliente.id==pedido.id_cliente}" th:text="${cliente.nombre}+'&nbsp'+ 
+			${cliente.apellido1}+'&nbsp'+${cliente.apellido2 ?: '&nbsp;'}" th:href="@{'/clientes/'+${cliente.id}}" th:target="_blank">0</a>
+			
+		</div>
+		
 
 </div>
+		
+
+
 </body>
 </html>
