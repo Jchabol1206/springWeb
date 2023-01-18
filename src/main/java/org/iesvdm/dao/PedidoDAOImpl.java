@@ -43,6 +43,23 @@ public class PedidoDAOImpl implements PedidoDAO{
 		}
 		
 	}
+	@Override
+	public Optional<List<Pedido>> findSorted(int id) {
+		List<Pedido> listPed =  jdbcTemplate.query(
+				"SELECT * FROM pedido WHERE id_comercial = ? order by total desc", (rs, rowNum) -> new Pedido(rs.getInt("id"),
+																				rs.getDouble("total"),
+																				rs.getDate("fecha"),
+																				rs.getLong("id_cliente"),
+																				rs.getInt("id_comercial"))
+																				,id);
+		if(listPed !=null) {
+			return Optional.of(listPed);
+		} else {
+			log.info("Pedido no encontrado");
+			return Optional.empty();
+		}
+		
+	}
 
 
 

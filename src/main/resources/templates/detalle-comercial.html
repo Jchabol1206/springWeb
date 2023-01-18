@@ -75,6 +75,22 @@
 				<input th:value="${comercial.comision}" value="Comision" readonly="readonly"/>
 			</div> 
 		</div>
+		<div style="margin-top: 6px;" class="clearfix">
+			<div style="float: left;width: 50%">
+				<label>TotalPedidos</label>
+			</div>
+			<div style="float: none;width: auto;overflow: hidden;">
+				<input th:value="${comercial.total}" value="Total" readonly="readonly"/>
+			</div> 
+		</div>
+		<div style="margin-top: 6px;" class="clearfix">
+			<div style="float: left;width: 50%">
+				<label>MediaPedidos</label>
+			</div>
+			<div style="float: none;width: auto;overflow: hidden;">
+				<input th:value="${comercial.media}" value="Media" readonly="readonly"/>
+			</div> 
+		</div>
 		
 		<hr>
 			<div class="clearfix">
@@ -87,12 +103,29 @@
 			<hr/>
 		</div>
 		<div  th:each="pedido : ${pedidos}" style="margin-top: 6px;" class="clearfix">
-			<div style="float: left;width: 14%" th:text="${pedido.id}">0</div>
+			<div style="float: left;width: 14% ;background-color: yellow" th:text="${pedido.id}" th:if="${pedido.id==idMin}">0</div>
+			<div style="float: left;width: 14% ;background-color: green" th:text="${pedido.id}" th:if="${pedido.id==idMax}">0</div>
+			<div style="float: left;width: 14%" th:text="${pedido.id}" th:if="${pedido.id!=idMin && pedido.id!=idMax}">0</div>
 			<div style="float: left;width: 14%" th:text="${pedido.total}">0</div>
 			<div style="float: left;width: 14%" th:text="${pedido.fecha}">fecha</div>
 			<a style="float: left;width: 14%" th:each="cliente : ${listaClientes}" th:if="${cliente.id==pedido.id_cliente}" th:text="${cliente.nombre}+'&nbsp'+ 
 			${cliente.apellido1}+'&nbsp'+${cliente.apellido2 ?: '&nbsp;'}" th:href="@{'/clientes/'+${cliente.id}}" th:target="_blank">0</a>
-			
+		</div>
+		<div style="margin-top:6px;" class="clearfix">
+			<span style="background-color:green">Pedido Maximo</span>
+			<span style="background-color:yellow">Pedido Minimo</span>
+		</div>
+		<div class="clearfix">
+			<hr/>
+		</div>
+		<div  th:each="pedido : ${pedidosOr}" style="margin-top: 6px;" class="clearfix">
+			<div style="float: left;width: 14% ;background-color: yellow" th:text="${pedido.id}" th:if="${pedido.id==idMin}">0</div>
+			<div style="float: left;width: 14% ;background-color: green" th:text="${pedido.id}" th:if="${pedido.id==idMax}">0</div>
+			<div style="float: left;width: 14%" th:text="${pedido.id}" th:if="${pedido.id!=idMin && pedido.id!=idMax}">0</div>
+			<div style="float: left;width: 14%" th:text="${pedido.total}">0</div>
+			<div style="float: left;width: 14%" th:text="${pedido.fecha}">fecha</div>
+			<a style="float: left;width: 14%" th:each="cliente : ${listaClientes}" th:if="${cliente.id==pedido.id_cliente}" th:text="${cliente.nombre}+'&nbsp'+ 
+			${cliente.apellido1}+'&nbsp'+${cliente.apellido2 ?: '&nbsp;'}" th:href="@{'/clientes/'+${cliente.id}}" th:target="_blank">0</a>
 		</div>
 		
 

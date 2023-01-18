@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.iesvdm.modelo.Cliente;
 import org.iesvdm.modelo.Comercial;
+import org.iesvdm.modelo.ComercialDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -124,5 +125,28 @@ log.info("Update de Comercial con {} registros actualizados.", rows);
 		log.info("Delete de Comercial con {} registros eliminados.", rows);
 
 	}
+
+	@Override
+	public Optional<ComercialDTO> findDTO(int id) {
+		ComercialDTO com =  (ComercialDTO) jdbcTemplate
+				.queryForObject("select comercial.*, sum(p.total), avg(p.total) from comercial left outer join pedido p on p.id_comercial=comercial.id where comercial.id=?"														
+								, (rs, rowNum) -> new ComercialDTO(rs.getInt("id"),
+            						 						rs.getString("nombre"),
+            						 						rs.getString("apellido1"),
+            						 						rs.getString("apellido2"),
+            						 						rs.getInt("comisión"),
+            						 						rs.getDouble("sum(p.total)"),
+            						 						rs.getDouble("avg(p.total)")) 
+								, id
+								);
+		
+		if (com != null) { 
+			return Optional.of(com);}
+		else { 
+			log.info("Comercial no encontrado.");
+			return Optional.empty(); }
+	}
+
+
 
 }

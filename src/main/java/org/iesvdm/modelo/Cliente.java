@@ -20,4 +20,6 @@ public class Cliente {
 	private String ciudad;
 	private int categoria;
 	
+	
+	
 }

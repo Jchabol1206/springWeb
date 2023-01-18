@@ -26,6 +26,15 @@ public class PedidoService {
 			return null;
 		}
 	}
+	public List<Pedido> two (Integer id) {
+		Optional<List<Pedido>> optPed = pedidoDAO.findSorted(id);
+		if(optPed.isPresent()) {
+			return (List<Pedido>) optPed.get();
+		}
+		else {
+			return null;
+		}
+	}
 	
 
 }
