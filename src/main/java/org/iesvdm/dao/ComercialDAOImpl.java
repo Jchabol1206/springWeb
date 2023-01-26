@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.iesvdm.modelo.Cliente;
 import org.iesvdm.modelo.Comercial;
 import org.iesvdm.modelo.ComercialDTO;
+import org.iesvdm.modelo.ComercialDTOTr;
+import org.iesvdm.modelo.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -147,6 +149,7 @@ log.info("Update de Comercial con {} registros actualizados.", rows);
 			return Optional.empty(); }
 	}
 
-
+	
+	
 
 }

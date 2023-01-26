@@ -7,6 +7,7 @@ import org.iesvdm.dao.ComercialDAO;
 import org.iesvdm.modelo.Cliente;
 import org.iesvdm.modelo.Comercial;
 import org.iesvdm.modelo.ComercialDTO;
+import org.iesvdm.modelo.Pedido;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -41,7 +42,15 @@ public class ComercialService {
 			return null;
 		}
 	}
-	
+	/*public List<ComercialDTO> two (Integer id) {
+		Optional<List<ComercialDTO>> optPed = comercialDAO.getAllconId(id);
+		if(optPed.isPresent()) {
+			return (List<ComercialDTO>) optPed.get();
+		}
+		else {
+			return null;
+		}
+	}*/
 	public void newComercial (Comercial cliente) {
 		comercialDAO.create(cliente);
 	}

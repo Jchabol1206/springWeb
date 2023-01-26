@@ -1,9 +1,16 @@
 package org.iesvdm.controlador;
 
+import java.util.DoubleSummaryStatistics;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.iesvdm.modelo.Cliente;
+import org.iesvdm.modelo.ComercialDTO;
+import org.iesvdm.modelo.Comercial;
 import org.iesvdm.service.ClienteService;
+import org.iesvdm.service.ComercialService;
+import org.iesvdm.service.PedidoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,13 +29,18 @@ import org.springframework.web.servlet.view.RedirectView;
 public class ClienteController {
 	
 	private ClienteService clienteService;
+	private ComercialService comercialService;
+	private PedidoService pedidoService;
 	
 	//Se utiliza inyección automática por constructor del framework Spring.
 	//Por tanto, se puede omitir la anotación Autowired
 	//@Autowired
-	public ClienteController(ClienteService clienteService) {
+	public ClienteController(ClienteService clienteService, ComercialService comercialService, PedidoService pedidoService) {
 		this.clienteService = clienteService;
+		this.comercialService= comercialService;
+		this.pedidoService=pedidoService;
 	}
+	public record stat(long trim, long Seme, long mapAnio) {}
 	
 	//@RequestMapping(value = "/clientes", method = RequestMethod.GET)
 	//equivalente a la siguiente anotación
@@ -45,8 +57,32 @@ public class ClienteController {
 	
 	@GetMapping("/clientes/{id}")
 	public String detalle(Model model, @PathVariable Integer id) {
+
 		Cliente cliente = clienteService.one(id);
+		Map<Comercial, org.iesvdm.service.ClienteService.VectorStats> listaCom = clienteService.estadisticasPedidosClientePorComercial(id);
+		
+		long contar=0;
+		Map<Comercial, stat> listaCom1=new HashMap<Comercial, stat>();
+		for(Comercial comercial:listaCom.keySet()) {
+	
+			long trim=0;
+			long Seme=0;
+			long mapAnio=0;
+
+
+			if(listaCom.get(comercial).trim()!=null) {
+				trim=listaCom.get(comercial).trim().getCount();
+			}
+			if(listaCom.get(comercial).Seme()!=null) {
+				Seme=listaCom.get(comercial).Seme().getCount();
+			}
+			if(listaCom.get(comercial).mapAnio()!=null) {
+				mapAnio=listaCom.get(comercial).mapAnio().getCount();
+			}
+			listaCom1.put(comercial, new stat(trim, Seme, mapAnio));
+		}
 		model.addAttribute("cliente", cliente);
+		model.addAttribute("listaComercial", listaCom1);
 		return "detalle-cliente";
 	}
 	

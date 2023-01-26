@@ -9,4 +9,5 @@ public interface PedidoDAO {
 	
 	public Optional<List<Pedido>> find(int id);
 	public Optional<List<Pedido>> findSorted(int id);
+	public List<Pedido> getPedidosPorComercial(int idCliente);
 }
