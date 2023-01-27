@@ -5,8 +5,8 @@ import org.iesvdm.modelo.ComercialDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel="spring")
-public interface ComercialMapper {
+
+/*public interface ComercialMapper {
 	
 	
 	@Mapping(target = "pedido_id", source ="idpedido")
@@ -14,4 +14,4 @@ public interface ComercialMapper {
 
 	
 	public Comercial comercialDTOAComercial(ComercialDTO comercial);
-}
+}/*/

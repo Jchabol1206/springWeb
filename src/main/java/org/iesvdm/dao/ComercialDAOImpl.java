@@ -45,7 +45,7 @@ public class ComercialDAOImpl implements ComercialDAO {
 			ps.setString(idx++, cliente.getNombre());
 			ps.setString(idx++, cliente.getApellido1());
 			ps.setString(idx++, cliente.getApellido2());
-			ps.setFloat(idx++, cliente.getComision());
+			ps.setBigDecimal(idx++, cliente.getComision());
 			return ps;
 		},keyHolder);
 
@@ -73,7 +73,7 @@ public class ComercialDAOImpl implements ComercialDAO {
                 							  rs.getString("nombre"), 
                 							  rs.getString("apellido1"),
                 							  rs.getString("apellido2"), 
-                							  rs.getFloat("comisión"))
+                							  rs.getBigDecimal("comisión"))
                 						 	
         );
 		
@@ -90,7 +90,7 @@ public class ComercialDAOImpl implements ComercialDAO {
             						 						rs.getString("nombre"),
             						 						rs.getString("apellido1"),
             						 						rs.getString("apellido2"),
-            						 						rs.getInt("comisión")) 
+            						 						rs.getBigDecimal("comisión")) 
 								, id
 								);
 		
@@ -136,7 +136,7 @@ log.info("Update de Comercial con {} registros actualizados.", rows);
             						 						rs.getString("nombre"),
             						 						rs.getString("apellido1"),
             						 						rs.getString("apellido2"),
-            						 						rs.getInt("comisión"),
+            						 						rs.getBigDecimal("comisión"),
             						 						rs.getDouble("sum(p.total)"),
             						 						rs.getDouble("avg(p.total)")) 
 								, id

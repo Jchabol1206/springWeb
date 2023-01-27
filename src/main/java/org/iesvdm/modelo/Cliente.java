@@ -1,5 +1,10 @@
 package org.iesvdm.modelo;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 //La anotación @Data de lombok proporcionará el código de: 
@@ -14,11 +19,22 @@ public class Cliente {
 		// TODO Auto-generated constructor stub
 	}
 	private long id;
+	@NotBlank(message = "Por favor, introduzca nombre")
+	@Size(max=31, message ="Nombre como maximo de 30 caracteres")
 	private String nombre;
+	@NotBlank(message = "Por favor, introduzca apellido")
+	@Size(max=31, message ="Apellido como maximo de 30 caracteres")
 	private String apellido1;
 	private String apellido2;
+	@NotBlank(message = "Por favor, introduzca ciudad")
+	@Size(max=51, message ="Ciudad como maximo de 50 caracteres")
 	private String ciudad;
+	@Min(value=99, message = "Categoría minima 100")
+	@Max(value=1001, message= "Categoria maxima 1000")
 	private int categoria;
+	
+	@Email(message="obligatorio")
+	private String email;
 	
 	
 	
