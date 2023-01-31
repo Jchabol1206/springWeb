@@ -90,7 +90,7 @@
 				Email
 			</div>
 			<div style="float: none;width: auto;overflow: hidden;">
-				<input th:field="*{email}" />
+				<input th:field="*{email}"/>
 				<ul th:if="${#fields.hasErrors('email')}">
 				<li th:each="err : ${#fields.errors('email')}" th:text="${err}" class="error"></li>
 				</ul>
